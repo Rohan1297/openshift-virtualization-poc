@@ -1,0 +1,26 @@
+# Apply in the same namespace as your VM. See README for the VM template label.
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm-hello
+spec:
+  selector:
+    app: vm-hello
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: vm-hello
+spec:
+  to:
+    kind: Service
+    name: vm-hello
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

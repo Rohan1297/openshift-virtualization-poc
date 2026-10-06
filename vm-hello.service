@@ -1,0 +1,14 @@
+[Unit]
+Description=VM Hello Spring Boot workshop app
+After=network.target
+
+[Service]
+User=vmhello
+WorkingDirectory=/opt/vm-hello
+ExecStart=/usr/bin/java -jar /opt/vm-hello/vm-hello-1.0.0.jar
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
